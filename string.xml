@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<core name="string" version="0.1.0">
+<core name="string" branch="master">
   <function name="first_char"/>
   <function name="is_empty"/>
   <function name="last_char"/>
