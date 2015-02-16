@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<core name="string" version="0.1.0">
+  <function name="first_char"/>
+  <function name="is_empty"/>
+  <function name="last_char"/>
+  <function name="rename"/>
+  <function name="identity"/>
+  <function name="fill"/>
+  <function name="dummy_print"/>
+  <function name="for_each_item"/>
+</core>

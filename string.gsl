@@ -1,0 +1,77 @@
+.template 0
+
+function global.string__first_char(value)
+  return string.substr(my.value, 0, 0)
+endfunction
+
+function global.string__is_empty(value)
+  return ((my.value ? "") = "")
+endfunction
+
+function global.string__last_char(value)
+  my.position = string.length(my.value)
+  my.character = string.substr(my.value, my.position, my.position)
+  return my.character
+endfunction
+
+function global.string__rename(name)
+  my.s = string.trim("$(my.Name)")
+  my.s = string.replace(my.s, " |")
+  my.s = string.replace(my.s, "-|")
+  my.s = string.replace(my.s, "_|")
+  my.s = string.replace(my.s, "'|")
+  return my.s
+endfunction
+
+function global.string__identity(name)
+  my.s = string.trim("$(my.name)")
+  my.s = string.replace(my.s, " |_")
+  my.s = string.replace(my.s, "-|_")
+  my.s = string.replace(my.s, "'|_")
+  return my.s
+endfunction
+
+function global.string__fill(c, n)
+  my.s = ""
+  my.__count = 0
+  while my.__count < my.n
+    my.s += "$(my.c)"
+    my.__count += 1
+  endwhile
+  return my.s
+endfunction
+
+function global.string__dummy_print(msg)
+  echo my.msg
+endfunction
+
+function for_each_item_callback(callback, prefix, arg1, arg2, arg3, arg4)
+  if defined(my.arg4)
+    $(my.callback)(my.prefix, my.arg1, my.arg2, my.arg3, my.arg4)
+  elsif defined(my.arg3)
+    $(my.callback)(my.prefix, my.arg1, my.arg2, my.arg3)
+  elsif defined(my.arg2)
+    $(my.callback)(my.prefix, my.arg1, my.arg2)
+  elsif defined(my.arg1)
+    $(my.callback)(my.prefix, my.arg1)
+  else
+    $(my.callback)(my.prefix)
+  endif
+endfunction
+
+function global.string__for_each_item(pattern, callback, delim, arg1, arg2, arg3, arg4)
+  my.delim ?= '|'
+  my.callback ?= 'dummy_print'
+  my.remaining = my.pattern
+  
+  while string.cntch(my.remaining, my.delim)
+    my.prefix = string.prefix(my.remaining, my.delim)
+    for_each_item_callback(my.callback, my.prefix, my.arg1, my.arg2, my.arg3, my.arg4)
+    my.remaining = string.substr(my.remaining, string.length(my.prefix)+1)
+  endwhile
+  
+  for_each_item_callback(my.callback, my.remaining, my.arg1, my.arg2, my.arg3, my.arg4)
+ 
+endfunction
+
+.endtemplate
