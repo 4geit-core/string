@@ -9,4 +9,6 @@
   <function name="fill"/>
   <function name="dummy_print"/>
   <function name="for_each_item"/>
+  <function name="get_variable"/>
+  <function name="convert_variables"/>
 </core>

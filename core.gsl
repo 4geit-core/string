@@ -74,4 +74,42 @@ function global.string__for_each_item(pattern, callback, delim, arg1, arg2, arg3
  
 endfunction
 
+function global.string__get_variable(str)
+  my.var_begin = '#('
+  my.var_end = ')'
+  my.res = XML.new()
+  if !defined(string.locate(my.str, my.var_begin))
+    define my.res.found = 0
+    return my.res
+  endif
+  my.start = string.locate(my.str, my.var_begin)+string.length(my.var_begin)
+  my.str = string.substr(my.str, my.start)
+  if !defined(string.locate(my.str, my.var_end))
+    define my.res.found = 0
+    return my.res
+  endif
+  my.end = string.locate(my.str, my.var_end)-1
+  my.var = string.substr(my.str, 0, my.end)
+  define my.res.found = 1
+  define my.res.remaining = my.str
+  define my.res.var = my.var
+  return my.res
+endfunction
+
+function global.string__convert_variables(str, baseobj)
+  while 1
+    my.res = string__get_variable(my.str)
+    if !my.res.found
+      last
+    endif
+    if defined(my.baseobj)
+      my.var = my.baseobj.$(my.res.var)
+    else
+      my.var = $(my.res.var)
+    endif
+    my.str = string.replace(my.str, '#(' + my.res.var + ')|' + $(my.res.var))
+  endwhile
+  return my.str
+endfunction
+
 .endtemplate
