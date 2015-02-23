@@ -107,7 +107,7 @@ function global.string__convert_variables(str, baseobj)
     else
       my.var = $(my.res.var)
     endif
-    my.str = string.replace(my.str, '#(' + my.res.var + ')|' + $(my.res.var))
+    my.str = string.replace(my.str, '#(' + my.res.var + ')|' + my.var)
   endwhile
   return my.str
 endfunction
