@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<core name="string" branch="master">
+<core name="string" branch="master" description="4i core library providing basic string manipulation functions">
   <function name="first_char"/>
   <function name="is_empty"/>
   <function name="last_char"/>
