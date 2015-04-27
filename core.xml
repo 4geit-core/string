@@ -11,7 +11,14 @@
   <function name="for_each_item"/>
   <function name="get_variable"/>
   <function name="convert_variables"/>
-  
-  <test name="convert_global_variables_easy" description="convert global_variables eary usecase"/>
-  <test name="convert_global_variables_hard" description="convert global_variables hard usecase"/>
+
+  <test name="first_char" description="returns the first char of a string"/>
+  <test name="last_char" description="returns the last char of a string"/>
+  <test name="is_empty_false" description="returns false for a non-empty string"/>
+  <test name="is_empty_true" description="returns true for an empty string"/>
+  <test name="is_empty_none" description="returns true for a variable-less function call"/>
+  <test name="rename_hello_world" description="returns a cleaned out string"/>
+  <test name="conv_glob_var_easy" description="convert global variables easy usecase"/>
+  <test name="conv_glob_var_hard" description="convert global variables hard usecase"/>
+  <test name="conv_ctx_var_easy" description="convert context variables easy usecase"/>
 </core>
