@@ -19,17 +19,17 @@
 
 function global.string__first_char(value)
   return string.substr(my.value, 0, 0)
-endfunction
+endfunction string__first_char
 
 function global.string__is_empty(value)
   return ((my.value ? "") = "")
-endfunction
+endfunction string__is_empty
 
 function global.string__last_char(value)
   my.position = string.length(my.value)
   my.character = string.substr(my.value, my.position, my.position)
   return my.character
-endfunction
+endfunction string__last_char
 
 function global.string__rename(name)
   my.s = string.trim("$(my.Name)")
@@ -38,7 +38,7 @@ function global.string__rename(name)
   my.s = string.replace(my.s, "_|")
   my.s = string.replace(my.s, "'|")
   return my.s
-endfunction
+endfunction string__rename
 
 function global.string__identity(name)
   my.s = string.trim("$(my.name)")
@@ -46,7 +46,7 @@ function global.string__identity(name)
   my.s = string.replace(my.s, "-|_")
   my.s = string.replace(my.s, "'|_")
   return my.s
-endfunction
+endfunction string__identity
 
 function global.string__fill(c, n)
   my.s = ""
@@ -56,11 +56,11 @@ function global.string__fill(c, n)
     my.__count += 1
   endwhile
   return my.s
-endfunction
+endfunction string__fill
 
 function global.string__dummy_print(msg)
   echo my.msg
-endfunction
+endfunction string__dummy_print
 
 function for_each_item_callback(callback, prefix, arg1, arg2, arg3, arg4)
   if defined(my.arg4)
@@ -74,7 +74,7 @@ function for_each_item_callback(callback, prefix, arg1, arg2, arg3, arg4)
   else
     $(my.callback)(my.prefix)
   endif
-endfunction
+endfunction for_each_item_callback
 
 function global.string__for_each_item(pattern, callback, delim, arg1, arg2, arg3, arg4)
   my.delim ?= '|'
@@ -88,8 +88,7 @@ function global.string__for_each_item(pattern, callback, delim, arg1, arg2, arg3
   endwhile
   
   for_each_item_callback(my.callback, my.remaining, my.arg1, my.arg2, my.arg3, my.arg4)
- 
-endfunction
+endfunction string__for_each_item
 
 function global.string__get_variable(str)
   my.var_begin = '#('
@@ -111,7 +110,7 @@ function global.string__get_variable(str)
   define my.res.remaining = my.str
   define my.res.var = my.var
   return my.res
-endfunction
+endfunction string__get_variable
 
 function global.string__convert_variables(str, baseobj)
   while 1
@@ -119,7 +118,7 @@ function global.string__convert_variables(str, baseobj)
     if !my.res.found
       last
     endif
-    if defined(my.baseobj)
+    if defined(my.baseobj) & defined(my.baseobj.$(my.res.var))
       my.var = my.baseobj.$(my.res.var)
     else
       my.var = $(my.res.var)
@@ -127,6 +126,16 @@ function global.string__convert_variables(str, baseobj)
     my.str = string.replace(my.str, '#(' + my.res.var + ')|' + my.var)
   endwhile
   return my.str
-endfunction
+endfunction string__convert_variables
+
+function string__test__convert_global_variables_easy
+  my_var = "my_value"
+  return string__convert_variables("#(my_var)") = "my_value"
+endfunction string__test__convert_global_variables_easy
+
+function string__test__convert_global_variables_hard
+  my_var = "my_value"
+  return string__convert_variables("my_dir/#(my_var)/my_subdir") = "my_dir/my_value/my_subdir"
+endfunction string__test__convert_global_variables_hard
 
 .endtemplate

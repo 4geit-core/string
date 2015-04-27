@@ -11,4 +11,7 @@
   <function name="for_each_item"/>
   <function name="get_variable"/>
   <function name="convert_variables"/>
+  
+  <test name="convert_global_variables_easy" description="convert global_variables eary usecase"/>
+  <test name="convert_global_variables_hard" description="convert global_variables hard usecase"/>
 </core>
