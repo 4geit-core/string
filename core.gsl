@@ -73,6 +73,10 @@ function global.string__identity(name)
   return my.s
 endfunction
 
+function string__test__identity_hello_world
+  return global.string__identity(" hel'lo-wor_ld ") = "_hel_lo_wor_ld"
+endfunction
+
 function global.string__fill(c, n)
   my.s = ""
   my.__count = 0
@@ -81,6 +85,10 @@ function global.string__fill(c, n)
     my.__count += 1
   endwhile
   return my.s
+endfunction
+
+function string__test__fill_whitespaces
+  return global.string__fill(' ', 10) = "          "
 endfunction
 
 function global.string__dummy_print(msg)

@@ -18,6 +18,8 @@
   <test name="is_empty_true" description="returns true for an empty string"/>
   <test name="is_empty_none" description="returns true for a variable-less function call"/>
   <test name="rename_hello_world" description="returns a cleaned out string"/>
+  <test name="identity_hello_world" description="returns a cleaned out string as an identity"/>
+  <test name="fill_whitespaces" description="returns a string containing 10 whitespaces"/>
   <test name="conv_glob_var_easy" description="convert global variables easy usecase"/>
   <test name="conv_glob_var_hard" description="convert global variables hard usecase"/>
   <test name="conv_ctx_var_easy" description="convert context variables easy usecase"/>
